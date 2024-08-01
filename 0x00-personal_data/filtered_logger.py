@@ -61,3 +61,24 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database=os.getenv("PERSONAL_DATA_DB_NAME"),
     )
     return mydb
+
+
+def main() -> None:
+    """Executes a SELECT query on the "users" table in the
+    database and logs the results."""
+    db = get_db()
+    mycursor = db.cursor()
+    mycursor.execute("SELECT * FROM users;")
+    headers = mycursor.column_names
+    logger = get_logger()
+    for row in mycursor:
+        filtered = ""
+        for f, p in zip(row, headers):
+            filtered += f'{p}={(f)}; '
+        logger.info(filtered)
+    mycursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
