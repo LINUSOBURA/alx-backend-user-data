@@ -2,8 +2,8 @@
 """Filter Data"""
 
 import logging
-import os
 import re
+from os import getenv
 from typing import List
 
 import mysql.connector
@@ -52,12 +52,12 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    """Connects to a MySQL database using the credentials provided 
+    """Connects to a MySQL database using the credentials provided
     in the environment variables"""
     mydb = mysql.connector.connect(
-        host=os.environ.get("PERSONAL_DATA_DB_HOST", "localhost"),
-        user=os.environ.get("PERSONAL_DATA_DB_USERNAME", "root"),
-        password=os.environ.get("PERSONAL_DATA_DB_PASSWORD", ""),
-        database=os.environ.get("PERSONAL_DATA_DB_NAME", ""),
+        host=getenv("PERSONAL_DATA_DB_HOST", "localhost"),
+        user=getenv("PERSONAL_DATA_DB_USERNAME", "root"),
+        password=getenv("PERSONAL_DATA_DB_PASSWORD", ""),
+        database=getenv("PERSONAL_DATA_DB_NAME", ""),
     )
     return mydb
