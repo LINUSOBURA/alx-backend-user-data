@@ -2,8 +2,11 @@
 """Filter Data"""
 
 import logging
+import os
 import re
 from typing import List
+
+import mysql.connector
 
 
 class RedactingFormatter(logging.Formatter):
@@ -45,3 +48,16 @@ def get_logger() -> logging.Logger:
     handler = logging.StreamHandler()
     handler.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.addHandler(handler)
+    return logger
+
+
+def get_db():
+    """Connects to a MySQL database using the credentials provided 
+    in the environment variables"""
+    mydb = mysql.connector.connect(
+        host=os.environ.get("PERSONAL_DATA_DB_HOST", "localhost"),
+        user=os.environ.get("PERSONAL_DATA_DB_USERNAME", "root"),
+        password=os.environ.get("PERSONAL_DATA_DB_PASSWORD", ""),
+        database=os.environ.get("PERSONAL_DATA_DB_NAME", ""),
+    )
+    return mydb
