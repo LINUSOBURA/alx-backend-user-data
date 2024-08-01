@@ -8,13 +8,13 @@ from typing import List
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
-        """
+    """
 
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
-    def __init__(self, fields: List[str]) -> None:
+    def __init__(self, fields: List[str]):
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
