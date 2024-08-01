@@ -20,7 +20,6 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         """Format the log record by filtering sensitive data."""
-        NotImplementedError
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
 
