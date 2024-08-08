@@ -10,6 +10,7 @@ class SessionAuth(Auth):
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
+        """Create a session using uuid and user ID"""
         if not isinstance(user_id, str) or user_id is None:
             return None
         session_id = str(uuid.uuid4())
