@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Session_auth module"""
 from flask import Blueprint, abort, current_app, jsonify, request
+
+from api.v1.auth import auth
+from api.v1.views import app_views
 from models.user import User
-
-from api.v1.app import auth  # Import here to avoid circular import issues
-
-app_views = Blueprint('session_auth', __name__, url_prefix='/api/v1')
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
