@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Basic Flask App"""
 
-from flask import Flask, abort, jsonify, request
+from flask import Flask, abort, jsonify, redirect, request
 
 from auth import Auth
 
@@ -50,7 +50,7 @@ def logout() -> str:
     try:
         user = AUTH.get_user_from_session_id(session_id)
         AUTH.destroy_session(user.id)
-        return jsonify({"message": "logged out"})
+        redirect('/')
     except Exception:
         abort(403)
 
