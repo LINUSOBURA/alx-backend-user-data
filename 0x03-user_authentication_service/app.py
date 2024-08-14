@@ -36,7 +36,7 @@ def login() -> str:
 
     try:
         user = AUTH.valid_login(email, password)
-        session_id = AUTH.create_session(email)
+        AUTH.create_session(email)
         return jsonify({"email": user.email, "message": "logged in"})
     except Exception:
         abort(401)

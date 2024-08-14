@@ -55,7 +55,7 @@ class Auth:
         except Exception:
             return None
 
-    def get_user_from_sesion_id(self, session_id: str) -> object:
+    def get_user_from_sesion_id(self, session_id: str) -> None:
         """Get user from session id"""
         try:
             user = self._db.find_user_by(session_id=session_id)
