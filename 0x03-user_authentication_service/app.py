@@ -42,5 +42,18 @@ def login() -> str:
         abort(401)
 
 
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout() -> str:
+    """Logout a user"""
+    session_id = request.form.get('session_id')
+
+    try:
+        user = AUTH.get_user_from_session_id(session_id)
+        AUTH.destroy_session(user.id)
+        return jsonify({"message": "logged out"})
+    except Exception:
+        abort(403)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
