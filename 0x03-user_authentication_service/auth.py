@@ -16,13 +16,14 @@ def _hash_password(password: str) -> bytes:
     return hashed
 
 
+def _generate_uuid(self) -> str:
+    """Generate a new UUID"""
+    return str(uuid.uuid4())
+
+
 class Auth:
     """Auth class to interact with the authentication database.
     """
-
-    def _generate_uuid(self) -> str:
-        """Generate a new UUID"""
-        return str(uuid.uuid4())
 
     def __init__(self):
         self._db = DB()
