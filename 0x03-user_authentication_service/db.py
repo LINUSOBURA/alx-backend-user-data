@@ -42,7 +42,7 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, **kwargs: Dict[str, str]) -> object:
+    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """Find a user by attributes"""
         if not kwargs:
             raise InvalidRequestError()
