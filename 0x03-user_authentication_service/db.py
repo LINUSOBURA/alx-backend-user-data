@@ -50,8 +50,9 @@ class DB:
         # if result is None:
         #     raise NoResultFound()
         # return result
+        session = self.__session
         try:
-            user = self._session.query(User).filter_by(**kwargs).one()
+            user = session.query(User).filter_by(**kwargs).one()
         except NoResultFound:
             raise NoResultFound()
         except InvalidRequestError:
