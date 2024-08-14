@@ -44,12 +44,19 @@ class DB:
 
     def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """Find a user by attributes"""
-        if not kwargs:
-            raise InvalidRequestError()
-        result = self._session.query(User).filter_by(**kwargs).one()
-        if result is None:
+        # if not kwargs:
+        #     raise InvalidRequestError()
+        # result = self._session.query(User).filter_by(**kwargs).one()
+        # if result is None:
+        #     raise NoResultFound()
+        # return result
+        try:
+            user = self._session.query(User).filter_by(**kwargs).one()
+        except NoResultFound:
             raise NoResultFound()
-        return result
+        except InvalidRequestError:
+            raise InvalidRequestError()
+        return user
 
     def update_user(self, user_id: int, **kwargs: Dict[str, str]) -> None:
         """Update a user"""
