@@ -91,10 +91,11 @@ def update_password() -> str:
 
     try:
         user = AUTH.get_user_by_email(email)
+        AUTH.update_password(reset_token, new_password)
+        return jsonify({"email": user.email, "message": "Password updated"})
+
     except Exception:
         abort(403)
-    AUTH.update_password(reset_token, new_password)
-    return jsonify({"email": user.email, "message": "Password updated"})
 
 
 if __name__ == "__main__":
