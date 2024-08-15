@@ -2,7 +2,6 @@
 """
 DB module
 """
-from typing import Dict
 
 from sqlalchemy import create_engine
 from sqlalchemy.exc import InvalidRequestError
@@ -52,7 +51,7 @@ class DB:
             raise NoResultFound
         return user
 
-    def update_user(self, user_id: int, **kwargs: Dict[str, str]) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """Update a user"""
         user = self.find_user_by(id=user_id)
         for key, value in kwargs.items():
