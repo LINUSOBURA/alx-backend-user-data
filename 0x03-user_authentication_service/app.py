@@ -77,7 +77,7 @@ def profile() -> str:
 def get_reset_password_token() -> str:
     """Get reset password token"""
     email = request.form.get('email')
-    user = AUTH._db.get_user_by_email(email)
+    user = AUTH.get_user_by_email(email)
     if user is None:
         abort(403)
     token = Auth.get_reset_password_token(email)
