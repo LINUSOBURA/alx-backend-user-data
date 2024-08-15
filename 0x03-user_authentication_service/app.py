@@ -4,9 +4,11 @@
 from flask import Flask, abort, jsonify, redirect, request, url_for
 
 from auth import Auth
+from db import DB
 
 app = Flask(__name__)
 AUTH = Auth()
+db = DB()
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
@@ -75,7 +77,7 @@ def profile() -> str:
 def get_reset_password_token() -> str:
     """Get reset password token"""
     email = request.form.get('email')
-    user = AUTH.get_user_by_email(email)
+    user = db.find_user_by(email)
     if user is None:
         abort(403)
     token = Auth.get_reset_password_token(email)
