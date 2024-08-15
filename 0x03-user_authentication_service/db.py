@@ -42,7 +42,7 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """Find a user by attributes"""
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
@@ -56,8 +56,8 @@ class DB:
         """Update a user"""
         user = self.find_user_by(id=user_id)
         for key, value in kwargs.items():
-            if hasattr(user, key):
-                setattr(user, key, value)
+            if hasattr(user, str(key)):
+                setattr(user, str(key), value)
             else:
                 raise ValueError
         self._session.commit()
