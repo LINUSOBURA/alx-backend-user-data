@@ -36,8 +36,10 @@ def login() -> str:
 
     try:
         user = AUTH.valid_login(email, password)
-        AUTH.create_session(email)
-        return jsonify({"email": user.email, "message": "logged in"})
+        session_id = AUTH.create_session(email)
+        response = jsonify({"email": user.email, "message": "logged in"})
+        response.set_cookie('session_id', session_id)
+        return response
     except Exception:
         abort(401)
 
