@@ -14,7 +14,7 @@ from user import User
 
 
 def _hash_password(password: str) -> bytes:
-    """Hash Password"""
+    """Hash Password and return the bytes"""
     hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
     return hashed
 
