@@ -90,7 +90,7 @@ def update_password() -> str:
     new_password = request.form.get('new_password')
 
     try:
-        user = AUTH.get_user_by_reset_token(reset_token)
+        user = AUTH.get_user_by_email(email)
     except Exception:
         abort(403)
     AUTH.update_password(reset_token, new_password)
