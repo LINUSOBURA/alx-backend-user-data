@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Basic Flask App"""
+"""Basic Flask App for Auth service"""
 
 from flask import Flask, abort, jsonify, redirect, request, url_for
 
@@ -75,11 +75,12 @@ def profile() -> str:
 def get_reset_password_token() -> str:
     """Get reset password token"""
     email = request.form.get('email')
-    user = AUTH.get_user_by_email(email)
-    if user is None:
+    try:
+        token = Auth.get_reset_password_token(email)
+    except ValueError:
         abort(403)
-    token = Auth.get_reset_password_token(email)
-    return jsonify({"email": user.email, "reset_token": token})
+    else:
+        return jsonify({"email": email, "reset_token": token})
 
 
 if __name__ == "__main__":
